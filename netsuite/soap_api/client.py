@@ -1,3 +1,4 @@
+import httpx
 import logging
 import re
 from contextlib import contextmanager
@@ -103,6 +104,7 @@ class NetSuiteSoapApi:
     def _generate_transport(self) -> zeep.transports.AsyncTransport:
         return AsyncNetSuiteTransport(
             self.wsdl_url,
+            client=httpx.AsyncClient(),
             cache=self.cache,
         )
 
